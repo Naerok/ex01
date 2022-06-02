@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.SampleDTO;
 import org.zerock.domain.SampleDTOList;
 
@@ -60,5 +62,22 @@ public class SampleController {
 		log.info("DTOlist: "+ list);
 		return "ex02Bean";
 	}
+	
+	@GetMapping("exUpload")
+	public void exUpload() {
+		log.info("exUpload................................");
+	}
+	
+	@PostMapping("/exUploadPost")
+	public void exUploadPost(ArrayList<MultipartFile> files) {
+		
+		files.forEach(file ->{
+			log.info(file.getOriginalFilename());
+			log.info(file.getSize());
+			log.info(file.getContentType());
+			
+		});
+	}
+	
 
 }
